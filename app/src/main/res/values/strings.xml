@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">FirebaseLoginTest</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_up">Sign up</string>
+    <string name="msg_email_address_not_verified">Email verification mail has been sent to your mail id. Please verify to login</string>
+
+
+    <string name="title_activity_register">Register</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_password_recovery">Password Reset</string>
+    <string name="action_password_reset">Password Reset</string>
+
+
 </resources>
