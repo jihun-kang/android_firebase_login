@@ -39,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
     private static final String TAG = "RegisterActivity";
     // UI references.
     private EditText mEmail;
-   private EditText  mPasswd;
+    private EditText mPasswd;
     private View mProgressView;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -53,9 +53,9 @@ public class RegisterActivity extends AppCompatActivity {
         mContext = this;
         mEmail = (EditText) findViewById(R.id.email);
         mPasswd = (EditText) findViewById(R.id.passwd);
+        mProgressView = findViewById(R.id.login_progress);
 
         mAuth = FirebaseAuth.getInstance();
-
 
         Button btnRegisterButton = (Button) findViewById(R.id.email_sign_up_button);
         if (btnRegisterButton != null) {
@@ -67,13 +67,10 @@ public class RegisterActivity extends AppCompatActivity {
             });
         }
 
-        ///mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
-
 
 
         // [START auth_state_listener]
-        mAuthListener = new FirebaseAuth.AuthStateListener(){
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
 
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -98,9 +95,7 @@ public class RegisterActivity extends AppCompatActivity {
                                             FirebaseAuth.getInstance().signOut();
                                             startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                                             finish();
-                                        }
-                                        else
-                                        {
+                                        } else {
                                             // email not sent, so display message and restart the activity or do whatever you wish to do
 
                                             //restart this activity
@@ -127,45 +122,32 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-
-    /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
-     */
     private void attemptRegister() {
         //String email = mEmail.getText().toString();
         //String password = mPasswd.getText().toString();
         String email = "jhis21c@gmail.com";
         String password = "kjh0201";
 
-
         boolean cancel = false;
 
         showProgress(true);
 
-         // [START create_user_with_email]
-            mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            Log.d("TEST", "createUserWithEmail:onComplete:" + task.isSuccessful());
+        // [START create_user_with_email]
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d("TEST", "createUserWithEmail:onComplete:" + task.isSuccessful());
 
-                            // If sign in fails, display a message to the user. If sign in succeeds
-                            // the auth state listener will be notified and logic to handle the
-                            // signed in user can be handled in the listener.
-                            if (!task.isSuccessful()) {
-                                Toast.makeText(mContext, "Authentication failed",
-                                        Toast.LENGTH_SHORT).show();
-                                showProgress(false);
-                            }
-
-                            // [START_EXCLUDE]
+                        if (!task.isSuccessful()) {
+                            Toast.makeText(mContext, "Authentication failed",
+                                    Toast.LENGTH_SHORT).show();
                             showProgress(false);
-                            // [END_EXCLUDE]
                         }
-                    });
-            // [END create_user_with_email]
+                        showProgress(false);
+                    }
+                });
+        // [END create_user_with_email]
 
     }
 
@@ -195,26 +177,11 @@ public class RegisterActivity extends AppCompatActivity {
         return password.length() > 4;
     }
 
-    /**
-     * Shows the progress UI and hides the login form.
-     */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-        // for very easy animations. If available, use these APIs to fade-in
-        // the progress spinner.
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-
-           // mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-          //  mLoginFormView.animate().setDuration(shortAnimTime).alpha(
-          //          show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-          //      @Override
-         //       public void onAnimationEnd(Animator animation) {
-          //          mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-          //      }
-          //  });
-
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
             mProgressView.animate().setDuration(shortAnimTime).alpha(
                     show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
@@ -224,13 +191,9 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             });
         } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-          ///  mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
-
 
 }
 

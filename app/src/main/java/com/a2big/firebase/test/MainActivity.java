@@ -43,26 +43,22 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
-/*
+
                     Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
                     finish();
-*/
+
                 }
                 // ...
             }
         };
 
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //creates a menu inflater
         MenuInflater inflater = getMenuInflater();
-        //generates a Menu from a menu resource file
-        //R.menu.main_menu represents the ID of the XML resource file
         inflater.inflate(R.menu.options, menu);
         return true;
     }
@@ -72,18 +68,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout:
-
                 FirebaseAuth.getInstance().signOut();
-
                 return true;
-
-
 
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
-
         }
     }
 
