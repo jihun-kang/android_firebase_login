@@ -67,8 +67,6 @@ public class RegisterActivity extends AppCompatActivity {
             });
         }
 
-
-
         // [START auth_state_listener]
         mAuthListener = new FirebaseAuth.AuthStateListener() {
 
