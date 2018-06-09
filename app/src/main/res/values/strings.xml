@@ -11,5 +11,7 @@
     <string name="title_activity_password_recovery">Password Reset</string>
     <string name="action_password_reset">Password Reset</string>
 
+    <string name="error_invalid_email">This email is invalid</string>
+    <string name="error_invalid_password">This password is invalid</string>
 
 </resources>

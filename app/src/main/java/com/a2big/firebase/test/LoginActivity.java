@@ -69,9 +69,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // TODO : click event
-                //Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
-                //startActivity(intent);
-                //finish();
+                Intent intent = new Intent(getApplicationContext(), ResetActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -86,17 +86,13 @@ public class LoginActivity extends AppCompatActivity {
                 if (user != null) {
                     // User is signed in
                     Log.d("TEST", "onAuthStateChanged:signed_in:" + user.getUid());
-
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                     finish();
-
-
                 } else {
                     // User is signed out
                     Log.d("TEST", "onAuthStateChanged:signed_out");
                 }
-
             }
         };
         // [END auth_state_listener]

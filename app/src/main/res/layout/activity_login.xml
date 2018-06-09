@@ -28,7 +28,7 @@
                 android:layout_height="30dp"
                 android:background="@android:color/white"
                 android:paddingLeft="10dp"
-                android:hint="이메일" />
+                android:hint="@string/email" />
 
             <EditText
                 android:id="@+id/passwd"
@@ -37,7 +37,8 @@
                 android:layout_height="30dp"
                 android:paddingLeft="10dp"
                 android:background="@android:color/white"
-                android:hint="비밀번호" />
+                android:inputType="textPassword"
+                android:hint="@string/password" />
 
             <Button
                 android:id="@+id/login_button"
@@ -45,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:text="로그인" />
+                android:text="Login" />
 
         </LinearLayout>
 
@@ -58,20 +59,24 @@
 
         <Button
             android:id="@+id/register_button"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
             android:background="@android:color/transparent"
-            android:text="가입" />
+            android:text="Create an account" />
 
         <Button
             android:id="@+id/reset_button"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+
+            android:layout_marginRight="20dp"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
-            android:layout_marginLeft="40dp"
+            android:layout_gravity="right"
             android:background="@android:color/transparent"
-            android:text="로그인과 관련하여 도움이 필요하세요?" />
+            android:text="Reset your password" />
 
     </LinearLayout>
 

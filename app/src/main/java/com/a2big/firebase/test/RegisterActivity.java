@@ -26,6 +26,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -120,13 +122,53 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    private void attemptRegister() {
-        //String email = mEmail.getText().toString();
-        //String password = mPasswd.getText().toString();
-        String email = "jhis21c@gmail.com";
-        String password = "kjh0201";
+    private boolean checkEmail(String email){
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
 
-        boolean cancel = false;
+
+    public boolean checkPassword(final String password) {
+
+        Pattern pattern;
+        Matcher matcher;
+
+        /*
+        ^                 # start-of-string
+        (?=.*[0-9])       # 숫자는 적어도 한번 사용
+        (?=.*[a-z])       # 소문자 적어도 한번 사용
+        (?=.*[A-Z])       # 대문자 적어도 한번 사용
+        (?=.*[@#$%^&+=])  # 해당 특수문자 사용 가능
+        (?=\\S+$)         # 공백은 사용 불가능
+        .{6,}             # 최소한 문자열 6글자 이상 조합
+         $
+         */
+        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}$";
+
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(password);
+
+        return matcher.matches();
+
+    }
+
+
+    private void attemptRegister() {
+        String email = mEmail.getText().toString();
+        String password = mPasswd.getText().toString();
+
+        if( checkEmail(email) == false){
+           // getString(R.string.error_invalid_email)
+            Toast.makeText(mContext, R.string.error_invalid_email,
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+        if( checkPassword(password) == false ){
+            Toast.makeText(mContext, R.string.error_invalid_password,
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         showProgress(true);
 
